@@ -11,25 +11,56 @@ console.log('its working');
 (c) Home Team goals for 2014 world cup final
 (d) Away Team goals for 2014 world cup final
 (e) Winner of 2014 world cup final */
+const home14 = fifaData.filter((home) => {
+    return home.Year === 2014 && home.Stage === 'Final';
+});
+console.log(home14[0]['Home Team Name']);
+
+const away14 = fifaData.filter((away) => {
+    return away.Year === 2014 && away.Stage === 'Final';
+});
+console.log(away14[0]['Away Team Name']);
+
+const homeGoals14 = fifaData.filter((home) => {
+    return home.Year === 2014 && home.Stage === 'Final';
+});
+console.log(homeGoals14[0]['Home Team Goals']);
+
+const awayGoals14 = fifaData.filter((away) => {
+    return away.Year === 2014 && away.Stage === 'Final';
+});
+console.log(awayGoals14[0]['Away Team Goals']);
+
+const winner14 = fifaData.filter((winner) => {
+    return winner.Year === 2014 && winner.Stage === 'Final' && winner['Home Team Goals'] > 0 || winner.Year === 2014 && winner.Stage === 'Final' && winner["Away Team Goals"] > 0;
+});
+console.log(winner14[0]['Home Team Name']);
+
+
 
 
 /* Task 2: Create a function called  getFinals that takes `data` as an argument and returns an array of objects with only finals data */
 
-function getFinals(/* code here */) {
+function getFinals(data) {
 
-    /* code here */
-
+    const finals = fifaData.filter((final) => {
+        return final.Stage === data;
+    })
+    return finals;
 };
+console.log(getFinals('Final'));
 
 /* Task 3: Implement a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
 
-function getYears(/* code here */) {
-
-    /* code here */
-
+function getYears(cb) {
+   
+    const years = cb('Final').map((year) => {
+        return cb('Final').Year;
+    })
+    return years;
 };
 
-getYears();
+console.log(getYears(getFinals));
 
 /* Task 5: Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
